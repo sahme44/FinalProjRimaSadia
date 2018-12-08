@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1b998b</color>
+    <color name="colorPrimaryDark">#0e514a</color>
+    <color name="colorAccent">#de3532</color>
+    <color name="plum">#5E0B15</color>
+    <color name="lighterPlum">#90323d</color>
+    <color name="eggshellBackground">#BFAFA6</color>
+    <color name="darkWhite">#aa968a</color>
+    <color name="honey">#bc8034</color>
+</resources>

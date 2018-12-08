@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">FinalProj</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="hungry">Hungry</string>
+    <string name="lost">Lost</string>
+    <string name="bored">Bored</string>
+    <string name="tired">Tired</string>
+    <string name="go_to_sleep">GO TO SLEEP</string>
+</resources>
