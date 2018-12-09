@@ -25,20 +25,33 @@ public class HungryPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hungry_page);
-        String url = "https://www.themealdb.com/api/json/v1/1/random.php";
-        RequestQueue queue;
-        queue = Volley.newRequestQueue(this);
-        final TextView showTitle = findViewById(R.id.showTitle);
-        final TextView showInstruc = findViewById(R.id.showLink);
         TextView mTextMessage = findViewById(R.id.HungryTitle);
-
         Button homeButton = findViewById(R.id.HomeButton);
+        Button refreshButton = findViewById(R.id.refreshButton);
+        createActivity();
         homeButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 openHomePage();
             }
         });
+        refreshButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createActivity();
+            }
+        });
+    }
+    public void openHomePage() {
+        Intent homeIntent = new Intent( HungryPage.this, MainActivity.class);
+        startActivity(homeIntent);
+    }
+    public void createActivity(){
+        String url = "https://www.themealdb.com/api/json/v1/1/random.php";
+        RequestQueue queue;
+        queue = Volley.newRequestQueue(this);
+        final TextView showTitle = findViewById(R.id.showTitle);
+        final TextView showInstruc = findViewById(R.id.showLink);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -73,8 +86,5 @@ public class HungryPage extends AppCompatActivity {
         queue.start();
         queue.add(stringRequest);
     }
-    public void openHomePage() {
-        Intent homeIntent = new Intent( HungryPage.this, MainActivity.class);
-        startActivity(homeIntent);
-    }
+
 }
