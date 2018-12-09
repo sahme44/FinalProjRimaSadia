@@ -29,7 +29,7 @@ public class LostPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lost_page);
         TextView mTextMessage = findViewById(R.id.LostTitle);
-        String url = "http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1";
+        String url = "https://api.adviceslip.com/advice";
         RequestQueue queue;
         queue = Volley.newRequestQueue(this);
         final TextView showActivity = findViewById(R.id.showAdvice);
@@ -51,9 +51,9 @@ public class LostPage extends AppCompatActivity {
                         String stringAdvice = null;
                         Log.d(TAG, "Got a response");
                         try {
-                            jsonArray = new JSONArray(response);
-                            information = new JSONObject(response);
-                            stringAdvice = (information.getString("content"));
+                            jsonObject = new JSONObject(response);
+                            information = jsonObject.getJSONObject("slip");
+                            stringAdvice = information.getString("advice");
                         } catch (JSONException e){
                             e.printStackTrace();
                         }
