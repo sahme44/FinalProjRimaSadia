@@ -12,7 +12,7 @@ public class OpeningPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_opening_page);
+        setContentView(R.layout.opening_page);
 
         Button startButton = (Button) findViewById(R.id.startButton);
         startButton.setOnClickListener(new OnClickListener() {
@@ -21,7 +21,7 @@ public class OpeningPage extends AppCompatActivity {
                 openMainPage();
             }
         });
-        }
+    }
     public void openMainPage() {
         Intent mainIntent = new Intent( OpeningPage.this, MainActivity.class);
         startActivity(mainIntent);

@@ -29,18 +29,32 @@ public class LostPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lost_page);
         TextView mTextMessage = findViewById(R.id.LostTitle);
-        String url = "http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1";
-        RequestQueue queue;
-        queue = Volley.newRequestQueue(this);
-        final TextView showActivity = findViewById(R.id.showAdvice);
-
         Button homeButton = findViewById(R.id.HomeButton);
+        Button refreshButton = findViewById(R.id.refreshButton);
+        createActivity();
         homeButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 openHomePage();
             }
         });
+        refreshButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createActivity();
+            }
+        });
+
+    }
+    public void openHomePage() {
+        Intent homeIntent = new Intent( LostPage.this, MainActivity.class);
+        startActivity(homeIntent);
+    }
+    public void createActivity() {
+        String url = "https://api.adviceslip.com/advice";
+        RequestQueue queue;
+        queue = Volley.newRequestQueue(this);
+        final TextView showActivity = findViewById(R.id.showAdvice);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -51,9 +65,9 @@ public class LostPage extends AppCompatActivity {
                         String stringAdvice = null;
                         Log.d(TAG, "Got a response");
                         try {
-                            jsonArray = new JSONArray(response);
-                            information = new JSONObject(response);
-                            stringAdvice = (information.getString("content"));
+                            jsonObject = new JSONObject(response);
+                            information = jsonObject.getJSONObject("slip");
+                            stringAdvice = information.getString("advice");
                         } catch (JSONException e){
                             e.printStackTrace();
                         }
@@ -69,8 +83,5 @@ public class LostPage extends AppCompatActivity {
         queue.start();
         queue.add(stringRequest);
     }
-    public void openHomePage() {
-        Intent homeIntent = new Intent( LostPage.this, MainActivity.class);
-        startActivity(homeIntent);
-    }
+
 }

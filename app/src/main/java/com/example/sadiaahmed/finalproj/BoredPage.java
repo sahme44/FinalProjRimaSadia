@@ -38,20 +38,32 @@ public class BoredPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bored_page);
-        Log.d(TAG, "Got here");
-        String url = "https://www.boredapi.com/api/activity/";
-        RequestQueue queue;
-        queue = Volley.newRequestQueue(this);
-        final TextView showActivity = findViewById(R.id.showActivity);
         TextView mTextMessage = findViewById(R.id.BoredTitle);
         Button homeButton = findViewById(R.id.HomeButton);
+        Button refreshButton = findViewById(R.id.refreshButton);
+        createActivity();
         homeButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 openHomePage();
             }
         });
-        Log.d(TAG, "Gets here too");
+        refreshButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createActivity();
+            }
+        });
+    }
+    public void openHomePage() {
+        Intent homeIntent = new Intent( BoredPage.this, MainActivity.class);
+        startActivity(homeIntent);
+    }
+    public void createActivity() {
+        String url = "https://www.boredapi.com/api/activity/";
+        RequestQueue queue;
+        queue = Volley.newRequestQueue(this);
+        final TextView showActivity = findViewById(R.id.showActivity);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -76,10 +88,6 @@ public class BoredPage extends AppCompatActivity {
         });
         queue.start();
         queue.add(stringRequest);
-    }
-    public void openHomePage() {
-        Intent homeIntent = new Intent( BoredPage.this, MainActivity.class);
-        startActivity(homeIntent);
     }
 }
 
